@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { Alert, ActivityIndicator} from 'react-native';
 import api from '../../services/api';
+import typecolor from '../../utils/typecolor';
 
 import {Container, ContainerType, Image, Text, TextId, TextType, Button, ButtonText} from './styles';
 
@@ -34,12 +35,12 @@ export default function PokemonCard({pokemon}){
                         {poke.types.length === 2 ?
                             (   
                                 <ContainerType>
-                                    <TextType>{poke.types[0].type.name.toUpperCase()}</TextType>
-                                    <TextType>{poke.types[1].type.name.toUpperCase()}</TextType>
+                                    <TextType style={{backgroundColor: typecolor[poke.types[0].type.name]}}>{poke.types[0].type.name.toUpperCase()}</TextType>
+                                    <TextType style={{backgroundColor: typecolor[poke.types[1].type.name]}}>{poke.types[1].type.name.toUpperCase()}</TextType>
                                 </ContainerType>
                             ):(
                                 <ContainerType>
-                                    <TextType>{poke.types[0].type.name.toUpperCase()}</TextType>
+                                    <TextType style={{backgroundColor: typecolor[poke.types[0].type.name]}}>{poke.types[0].type.name.toUpperCase()}</TextType>
                                 </ContainerType>
                             )
                         }

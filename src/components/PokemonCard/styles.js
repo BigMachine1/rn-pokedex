@@ -1,15 +1,15 @@
 import styled, {css}from 'styled-components/native';
+import { Dimensions } from 'react-native';
 import {RectButton} from 'react-native-gesture-handler';
-import typecolors from '../../utils/typecolor';
-import typecolor from '../../utils/typecolor';
 
-export const Container = styled.View`
+export const Container = styled.ScrollView`
     background: #a0a0a0;
     border-radius: 24px;
+    width: 45%;
     border-style: solid;
     border-width: 1px;
-    padding: 20px;
-    margin: 10px;
+    padding: 10px;
+    margin: 5px;
 `;
 
 export const Image = styled.Image`
@@ -24,10 +24,11 @@ export const Image = styled.Image`
 export const Text = styled.Text`
     text-align: center;
     margin: 10px;
-    font-size: 20px;
+    font-size: 15px;
+    color: white;
 `;
 export const TextId = styled.Text`
-    font-size: 25px;
+    font-size: 15px;
 `;
 export const ContainerType = styled.View`
     flex-direction: row;
@@ -37,34 +38,27 @@ export const TextType = styled.Text`
     text-align: center;
     border-style: solid;
     border-width: 1px;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
     margin: 5px;
     border-radius: 24px;
-    font-size: 15px;
-
-    ${props =>
-    props.selected &&
-    css`
-      background: ${typecolor(props.selected)};
-    `}
-
+    font-size: 10px;
+    color: white;
 `;
 
 export const Button = styled(RectButton)`
     background: #f04227;
     align-self: center;
-    width: 160px;
+    width: 100px;
     height: 30px;
     margin: 5px;
     justify-content: center;
     align-items: center;
-    border-style: solid;
-    border-width: 1px;
     border-radius: 24px;
     opacity: ${(props) => (props.loading ? 0.7 : 1)};
 `;
 
 export const ButtonText = styled.Text`
-    font-size: 15px;
+    font-size: 10px;
+    color: white;
 `;

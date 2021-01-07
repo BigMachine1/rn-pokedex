@@ -2,8 +2,10 @@ import styled from 'styled-components/native'
 import {RectButton} from 'react-native-gesture-handler';
 
 export const Container = styled.View`
-    flex: 1;
-    padding: 30px;
+    padding-top: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 65px;
 `;
 export const Form = styled.View`
     flex-direction: row;
@@ -35,6 +37,8 @@ export const SubmitButton = styled(RectButton)`
 export const List = styled.FlatList.attrs({
     flex: 1,
     showVerticalScrollIndicator: false,
+    numColumns: 2,
+    
 })`
     margin-top: 20px;
 `;

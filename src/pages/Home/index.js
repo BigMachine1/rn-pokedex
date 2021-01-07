@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {ActivityIndicator, Keyboard, FlatList, View, Text, Image, Alert} from 'react-native';
+import {ActivityIndicator, Keyboard, Alert} from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -7,16 +7,15 @@ import {
     Container,
     Form,
     Input,
-    SubmitButton,
-    List,
+    SubmitButton
 } from './styles';
 import api from '../../services/api';
 import PokemonCard from '../../components/PokemonCard';
+import { FlatList } from 'react-native-gesture-handler';
 
 export default function Home(){
     const [search, setSearch] = useState(null);
     const [pokemons, setPokemons] = useState([]);
-    const [pokemon, setPokemon] = useState([])
     const [loading, seTloading] = useState(false);
 
     async function loadPage(){
@@ -35,7 +34,6 @@ export default function Home(){
     async function handleSearchPokemon(){
         seTloading(true);
         const {data} = await api.get(`pokemon/${search}`);
-        setPokemon(data);
         setSearch(null);
         seTloading(false);
         Keyboard.dismiss();
@@ -63,6 +61,7 @@ export default function Home(){
             </Form>
             <FlatList 
                 data={pokemons}
+                numColumns={2}
                 keyExtractor ={(item) => item.name}
                 showsVerticalScrollIndicator={false}
                 renderItem={({item}) =>(
