@@ -1,14 +1,18 @@
 import React, {useState, useEffect} from 'react';
 import { Alert, ActivityIndicator} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import api from '../../services/api';
 import typecolor from '../../utils/typecolor';
+import PokemonType from '../PokemonType';
 
 import {Container, ContainerType, Image, Text, TextId, TextType, Button, ButtonText} from './styles';
 
 export default function PokemonCard({pokemon}){
     const {name} = pokemon;
+    const navigation = useNavigation();
     const [poke, setPoke]= useState([]);
     const [loaded, setLoaded] = useState(false);
+
 
     async function loadPokemon(){
         try{
@@ -18,6 +22,9 @@ export default function PokemonCard({pokemon}){
         }catch(e){
             Alert.alert('Erro ao ' + e);
         }
+    }
+    function navigationToDetail(pokemon) {
+        navigation.navigate('PokemonDetails', { pokemon });
     }
 
     useEffect(()=>{
@@ -32,19 +39,8 @@ export default function PokemonCard({pokemon}){
                         <TextId>#{poke.id}</TextId>
                         <Image source={{uri: poke.sprites.front_default}} />
                         <Text>{poke.name.toUpperCase()}</Text>
-                        {poke.types.length === 2 ?
-                            (   
-                                <ContainerType>
-                                    <TextType style={{backgroundColor: typecolor[poke.types[0].type.name]}}>{poke.types[0].type.name.toUpperCase()}</TextType>
-                                    <TextType style={{backgroundColor: typecolor[poke.types[1].type.name]}}>{poke.types[1].type.name.toUpperCase()}</TextType>
-                                </ContainerType>
-                            ):(
-                                <ContainerType>
-                                    <TextType style={{backgroundColor: typecolor[poke.types[0].type.name]}}>{poke.types[0].type.name.toUpperCase()}</TextType>
-                                </ContainerType>
-                            )
-                        }
-                        <Button onPress={()=>{}}>
+                        <PokemonType types={poke.types} />
+                        <Button onPress={()=> navigationToDetail(poke)}>
                             <ButtonText>DETALHES</ButtonText>
                         </Button>
                     </Container>

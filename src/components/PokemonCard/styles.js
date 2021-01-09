@@ -3,7 +3,7 @@ import { Dimensions } from 'react-native';
 import {RectButton} from 'react-native-gesture-handler';
 
 export const Container = styled.ScrollView`
-    background: #a0a0a0;
+    background: #a9a9a9;
     border-radius: 24px;
     width: 45%;
     border-style: solid;

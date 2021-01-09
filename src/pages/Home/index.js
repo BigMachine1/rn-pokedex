@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {ActivityIndicator, Keyboard, Alert} from 'react-native';
-
+import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import {
@@ -15,6 +15,7 @@ import { FlatList } from 'react-native-gesture-handler';
 
 export default function Home(){
     const [search, setSearch] = useState(null);
+    const navigation = useNavigation();
     const [pokemons, setPokemons] = useState([]);
     const [loading, seTloading] = useState(false);
 
@@ -27,13 +28,22 @@ export default function Home(){
         }
     }
 
+    function navigationToDetail(pokemon) {
+        navigation.navigate('PokemonDetails', { pokemon });
+    }
+
     useEffect(()=>{
         loadPage();
     }, []);
 
     async function handleSearchPokemon(){
         seTloading(true);
-        const {data} = await api.get(`pokemon/${search}`);
+        try{
+            const {data} = await api.get(`pokemon/${search}`);
+            navigationToDetail(data);
+        }catch(e){
+            Alert.alert('Não Encontrado');
+        }
         setSearch(null);
         seTloading(false);
         Keyboard.dismiss();
