@@ -5,7 +5,6 @@ export const Container = styled.View`
     padding-top: 30px;
     padding-left: 30px;
     padding-right: 30px;
-    padding-bottom: 65px;
 `;
 export const Form = styled.View`
     flex-direction: row;
@@ -41,4 +40,11 @@ export const List = styled.FlatList.attrs({
     
 })`
     margin-top: 20px;
+`;
+
+export const Refreshing = styled.ActivityIndicator.attrs({
+  size: 'large',
+  color: '#999',
+})`
+  margin: 30px 0;
 `;
